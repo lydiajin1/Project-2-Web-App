@@ -1,7 +1,7 @@
 {
-  "name": "domomaker",
+  "name": "recipenook",
   "version": "1.0.0",
-  "description": "A Simple Login Example using Node.js, Mongo and Redis",
+  "description": "Recipe Nook - A Recipe Management App using Node.js, Mongo, Redis, and React",
   "main": "./server/app.js",
   "scripts": {
     "webpack": "webpack",

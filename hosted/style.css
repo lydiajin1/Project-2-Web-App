@@ -4,6 +4,8 @@ html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    font-family: Arial, sans-serif;
+    background-color: #ffefe0;
 }
 
 #logo {
@@ -17,7 +19,7 @@ html, body {
 nav {
     width: 100%;
     height: 50px;
-    background-color: #55acee;
+    background-color: #095d63;
 }
 
 nav:nth-child(1) {
@@ -38,62 +40,74 @@ nav:nth-child(1) {
     text-decoration: none;
     padding: 5px;
     border-radius: 4px;
-    background-color: #55acee;
+    background-color: #095d63;
     transition: background-color 0.4s ease;
 }
 
 .navlink a:hover {
     transition: background-color 0.8s ease;
-    background-color: #66bdff;
+    background-color: #fac51d;
+    color: #0c4e53;
 }
 
-.domoForm {
-    border: 2px solid #338acc;
-    height: 35px;
-    width: 900px;
-    margin-top:0px;
-    padding-top:10px;
-    background-color: #55acee;
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
+.recipeForm {
+    border: 2px solid #095d63;
+    width: 90%;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #095d63;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.domoForm label {
-    display: inline-block;
-    width: 75px;
-    margin-left: 10px;
-    font-size: 1.2em;
-    float: left;
+.recipeForm label {
+    display: block;
+    margin-top: 10px;
+    font-size: 1.1em;
     color: white;
+    font-weight: bold;
 }
 
-.domoForm input[type=text] {
-    float:left;
-    width: 180px;
+.recipeForm input[type=text],
+.recipeForm input[type=number],
+.recipeForm textarea {
+    width: 95%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #0c4e53;
+    font-size: 1em;
 }
 
-.domoForm input[type=number] {
-    float:left;
-    width: 120px;
+.recipeForm textarea {
+    resize: vertical;
+    font-family: Arial, sans-serif;
 }
 
-.makeDomoSubmit {
+.makeRecipeSubmit {
     transition: background-color 0.4s ease;
-    display: inline;
-    width: 90px;
-    background-color: #55acee;
-    border-radius: 2px;
-    color: white;
+    display: block;
+    width: 150px;
+    margin: 20px auto 0;
+    padding: 10px;
+    background-color: #fac51d;
+    border-radius: 4px;
+    border: none;
+    color: #0c4e53;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
     text-decoration: none;
 }
 
-.makeDomoSubmit:link, .makeDomoSubmit:visited, .makeDomoSubmit:hover, .makeDomoSubmit:active {
-    color: white;
+.makeRecipeSubmit:link, .makeRecipeSubmit:visited, .makeRecipeSubmit:hover, .makeRecipeSubmit:active {
+    color: #0c4e53;
 }
 
-.makeDomoSubmit:hover {
+.makeRecipeSubmit:hover {
     transition: background-color 0.4s ease;
-    background-color: #338acc;
+    background-color: #e0b01a;
 }
 
 .mainForm {
@@ -124,21 +138,23 @@ nav:nth-child(1) {
     margin-top: 14px;
     font-size: 1.2em;
     width: 100px;
-    background-color: #55acee;
+    background-color: #fac51d;
     border-radius: 2px;
-    border-color: #66acee;
+    border-color: #e0b01a;
     padding: 3px 0px;
-    color: white;
+    color: #0c4e53;
+    font-weight: bold;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .formSubmit:link, .formSubmit:visited, .formSubmit:hover, .formSubmit:active {
-    color: white;
+    color: #0c4e53;
 }
 
 .formSubmit:hover {
     transition: background-color 0.4s ease;
-    background-color: #338acc;
+    background-color: #e0b01a;
 }
 
 #user, #pass, #pass2 {
@@ -150,34 +166,11 @@ nav:nth-child(1) {
 
 #user:focus, #pass:focus, #pass2:focus {
     outline: none;
-    box-shadow: 0px 0px 1px 1px #55acee;
+    box-shadow: 0px 0px 1px 1px #095d63;
 }
 
 .hidden {
     display: none;
-}
-
-#domoMessage {
-    top: 250px;
-    width: 250px;
-    height: 650px;
-    position: absolute;
-    z-index: 200;
-    right: 0px;
-    overflow: hidden;
-}
-
-#domoMessage h3 {
-    width: 200px;
-    position: absolute;
-    top: 0px;
-    left: 20px;
-}
-
-#speech {
-    height: 120px;
-    width: 250px;
-    z-index:300;
 }
 
 #errorMessage {
@@ -187,111 +180,93 @@ nav:nth-child(1) {
     font-style: italic;
 }
 
-#domo {
-    z-index: 225;
-    margin-top: -20px;
-    margin-left: 135px;
-    height: 450px;
-    width: 300px;
-    -ms-transform: rotate(330deg);
-    -webkit-transform: rotate(330deg); 
-    transform: rotate(330deg);
+#recipes {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
 }
 
-#domos {
-    width: 40%;
-    min-width: 400px;
-    border: 2px solid #55acee;
-    border-radius: 4px;
-    margin: 0 auto;
-    margin-top: 100px;
+.recipeList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
 }
 
-.domo {
-    width: 95%;
-    margin: 0 auto;
-    margin-top: 2px;
-    margin-bottom: 2px;
-    border: 2px solid #55acee;
-    border-radius: 4px;
-    background-color: #55acee;
-    padding: 10px;
-    min-height:60px;
-    overflow: hidden;
+.recipe {
+    background-color: white;
+    border: 2px solid #095d63;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(9, 93, 99, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.domo:hover {
-    transition: border-color 0.2s ease-out;
-    border-color: rgba(255,255,255, 0.8);
-    transition: background-color 2.6s ease-out;
-    background-color: #66bfff;
+.recipe:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 8px rgba(9, 93, 99, 0.3);
+    border-color: #fac51d;
 }
 
-img.domoFace {
-    margin-left: 25px;
-    margin-right: 10px;
-    height: 50px;
-    width: 50px;
-    border-radius: 4px;
-    margin-top:10px;
-    float:left;
-}
-
-h3.emptyDomo {
-    width: 400px;
+h3.emptyRecipe {
+    width: 100%;
     font-size: 1.5em;
-    margin: 0 auto;
+    margin: 50px auto;
     text-align: center;
-    margin-top: 18px;
+    color: #0c4e53;
 }
 
-h3.domoName {
-    float:left;
-    width: 250px;
+h3.recipeTitle {
+    font-size: 1.6em;
+    color: #095d63;
+    margin: 0 0 15px 0;
+    border-bottom: 2px solid #fac51d;
+    padding-bottom: 10px;
+}
+
+.recipeDetails {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #ffefe0;
+    border-radius: 4px;
+}
+
+.recipeDetails p {
+    margin: 0;
+    font-size: 1em;
+    color: #0c4e53;
     font-weight: bold;
-    padding-left: 10px;
-    font-size: 1.5em;
 }
 
-h3.domoAge {
-    float:right;
-    text-align: left;
-    width: 100px;
-    font-weight: bold;
-    padding-right: 40px;
-    font-size: 1.5em;
+.recipeContent {
+    margin: 15px 0;
 }
 
-h3.domoLevel {
-    float:right;
-    text-align: left;
-    width: 100px;
-    font-weight: bold;
-    padding-right: 40px;
-    font-size: 1.5em;
+.recipeContent p {
+    margin: 10px 0;
+    line-height: 1.6;
+    color: #0c4e53;
 }
 
-.deleteDomoButton {
-    float: left;
-    clear: left;
-    margin-left: 25px;
-    margin-top: 25px;
+.recipeContent strong {
+    color: #095d63;
+}
+
+.deleteRecipeButton {
+    display: block;
+    margin: 15px auto 0;
     background-color: #ff4444;
     color: white;
     border: none;
     cursor: pointer;
-    padding: 5px 10px;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-size: 1em;
     transition: background-color 0.3s ease;
 }
 
-.deleteDomoButton:hover {
+.deleteRecipeButton:hover {
     background-color: #cc0000;
-}
-
-.domo:first-child {
-    margin-top: 10px;
-}
-
-.domo:last-child {
-    margin-bottom:10px;
 }
