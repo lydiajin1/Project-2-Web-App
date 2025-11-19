@@ -116,6 +116,57 @@ const RecipeList = (props) => {
     );
 };
 
+const PremiumBanner = () => {
+    const [isPremium, setIsPremium] = useState(false);
+    const [recipeCount, setRecipeCount] = useState(0);
+
+    useEffect(() => {
+        const loadData = async () => {
+            const accountResponse = await fetch('/getAccountInfo');
+            const accountData = await accountResponse.json();
+            setIsPremium(accountData.isPremium);
+
+            const recipeResponse = await fetch('/getRecipes');
+            const recipeData = await recipeResponse.json();
+            setRecipeCount(recipeData.recipes.length);
+        };
+        loadData();
+    }, []);
+
+    const handleUpgrade = async () => {
+        const response = await fetch('/upgradePremium', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const result = await response.json();
+        if (result.message) {
+            setIsPremium(true);
+            alert('Upgraded to premium! You now have unlimited recipes!');
+        }
+    };
+
+    if (isPremium) {
+        return (
+            <div className="premiumBanner" style={{ backgroundColor: '#095d63', color: 'white' }}>
+                <p className="recipeCount" style={{ color: 'white' }}>Premium Account - Unlimited Recipes!</p>
+                <a href="/changePassword" className="changePasswordLink">Change Password</a>
+            </div>
+        );
+    }
+
+    return (
+        <div className="premiumBanner">
+            <p className="recipeCount">Recipes: {recipeCount} / 5 (Free Plan)</p>
+            <button className="upgradeButton" onClick={handleUpgrade}>
+                Upgrade to Premium - Unlimited Recipes!
+            </button>
+            <a href="/changePassword" className="changePasswordLink">Change Password</a>
+        </div>
+    );
+};
+
 const App = () => {
     const [reloadRecipes, setReloadRecipes] = useState(false);
 
@@ -125,6 +176,7 @@ const App = () => {
 
     return (
         <div>
+            <PremiumBanner />
             <div id="makeRecipe">
                 <RecipeForm triggerReload={triggerReload} />
             </div>

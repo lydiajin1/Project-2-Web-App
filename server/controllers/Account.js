@@ -56,9 +56,60 @@ const signup = async (req, res) => {
   }
 };
 
+const changePasswordPage = (req, res) => res.render('changePassword');
+
+const changePassword = async (req, res) => {
+  const oldPass = `${req.body.oldPassword}`;
+  const newPass = `${req.body.newPassword}`;
+  const newPass2 = `${req.body.newPassword2}`;
+
+  if (!oldPass || !newPass || !newPass2) {
+    return res.status(400).json({ error: 'All fields are required!' });
+  }
+
+  if (newPass !== newPass2) {
+    return res.status(400).json({ error: 'New passwords do not match!' });
+  }
+
+  return Account.authenticate(req.session.account.username, oldPass, async (err, account) => {
+    if (err || !account) {
+      return res.status(401).json({ error: 'Current password is incorrect!' });
+    }
+
+    try {
+      const hash = await Account.generateHash(newPass);
+      await Account.findByIdAndUpdate(req.session.account._id, { password: hash });
+      return res.json({ message: 'Password changed successfully!' });
+    } catch (updateErr) {
+      console.log(updateErr);
+      return res.status(500).json({ error: 'An error occurred changing password!' });
+    }
+  });
+};
+
+const upgradeToPremium = async (req, res) => {
+  try {
+    await Account.findByIdAndUpdate(req.session.account._id, { isPremium: true });
+    req.session.account.isPremium = true;
+    return res.json({ message: 'Upgraded to premium successfully!' });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'An error occurred upgrading account!' });
+  }
+};
+
+const getAccountInfo = (req, res) => res.json({
+  username: req.session.account.username,
+  isPremium: req.session.account.isPremium || false,
+});
+
 module.exports = {
   loginPage,
   logout,
   login,
   signup,
+  changePasswordPage,
+  changePassword,
+  upgradeToPremium,
+  getAccountInfo,
 };

@@ -270,3 +270,107 @@ h3.recipeTitle {
 .deleteRecipeButton:hover {
     background-color: #cc0000;
 }
+
+/* Premium Banner Styles */
+.premiumBanner {
+    background-color: #fac51d;
+    padding: 15px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 900px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(9, 93, 99, 0.2);
+}
+
+.recipeCount {
+    font-size: 1.2em;
+    color: #0c4e53;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+}
+
+.upgradeButton {
+    background-color: #095d63;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
+}
+
+.upgradeButton:hover {
+    background-color: #0c4e53;
+}
+
+.changePasswordLink {
+    color: #0c4e53;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: inline-block;
+}
+
+.changePasswordLink:hover {
+    text-decoration: underline;
+}
+
+.backLink {
+    display: block;
+    text-align: center;
+    color: #095d63;
+    margin-top: 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.backLink:hover {
+    text-decoration: underline;
+}
+
+/* 404 Page Styles */
+.notFoundContainer {
+    text-align: center;
+    padding: 100px 20px;
+    background-color: #ffefe0;
+}
+
+.notFoundTitle {
+    font-size: 8em;
+    color: #095d63;
+    margin: 0;
+    font-weight: bold;
+}
+
+.notFoundSubtitle {
+    font-size: 2em;
+    color: #0c4e53;
+    margin: 20px 0;
+}
+
+.notFoundText {
+    font-size: 1.2em;
+    color: #0c4e53;
+    margin: 20px 0;
+}
+
+.notFoundButton {
+    display: inline-block;
+    background-color: #fac51d;
+    color: #0c4e53;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.notFoundButton:hover {
+    background-color: #e0b01a;
+}
