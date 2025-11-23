@@ -57,28 +57,6 @@ const RecipeForm = (props) => {
     );
 };
 
-const RecipeCard = ({ recipe, onDelete }) => {
-    return (
-        <div className="recipe">
-            <h3 className="recipeTitle">{recipe.title}</h3>
-            <div className="recipeDetails">
-                <p><strong>Cook Time:</strong> {recipe.cookTime} min</p>
-                <p><strong>Difficulty:</strong> {recipe.difficulty}/5</p>
-            </div>
-            <div className="recipeContent">
-                <p><strong>Ingredients:</strong> {recipe.ingredients}</p>
-                <p><strong>Instructions:</strong> {recipe.instructions}</p>
-            </div>
-            <button
-                className="deleteRecipeButton"
-                onClick={() => handleDelete(recipe._id, onDelete)}
-            >
-                Delete
-            </button>
-        </div>
-    );
-};
-
 const RecipeList = (props) => {
     const [recipes, setRecipes] = useState(props.recipes);
 
@@ -99,13 +77,40 @@ const RecipeList = (props) => {
         );
     }
 
+    // Function to format text with line breaks
+    // Sourced from dev community article to learn how to use the \n newline character in React
+    // and properly formatting the text to display line breaks instead of one big block of text
+    // https://dev.to/yuya0114/how-to-display-line-breaks-in-react-for-the-n-newline-character-3b0h
+    const formatText = (text) => {
+        return text.split('\n').map((line, index) => (
+            <React.Fragment key={index}>
+                {line}
+                {index < text.split('\n').length - 1 && <br />}
+            </React.Fragment>
+        ));
+    };
+
     const recipeNodes = recipes.map(recipe => {
         return (
-            <RecipeCard
-                key={recipe._id}
-                recipe={recipe}
-                onDelete={props.triggerReload}
-            />
+            <div key={recipe._id} className="recipe">
+                <h3 className="recipeTitle">{recipe.title}</h3>
+                <div className="recipeDetails">
+                    <p><strong>Cook Time:</strong> {recipe.cookTime} min</p>
+                    <p><strong>Difficulty:</strong> {recipe.difficulty}/5</p>
+                </div>
+                <div className="recipeContent">
+                    <p><strong>Ingredients:</strong></p>
+                    <p className="recipeText">{formatText(recipe.ingredients)}</p>
+                    <p><strong>Instructions:</strong></p>
+                    <p className="recipeText">{formatText(recipe.instructions)}</p>
+                </div>
+                <button
+                    className="deleteRecipeButton"
+                    onClick={() => handleDelete(recipe._id, props.triggerReload)}
+                >
+                    Delete
+                </button>
+            </div>
         );
     });
 
@@ -116,23 +121,7 @@ const RecipeList = (props) => {
     );
 };
 
-const PremiumBanner = () => {
-    const [isPremium, setIsPremium] = useState(false);
-    const [recipeCount, setRecipeCount] = useState(0);
-
-    useEffect(() => {
-        const loadData = async () => {
-            const accountResponse = await fetch('/getAccountInfo');
-            const accountData = await accountResponse.json();
-            setIsPremium(accountData.isPremium);
-
-            const recipeResponse = await fetch('/getRecipes');
-            const recipeData = await recipeResponse.json();
-            setRecipeCount(recipeData.recipes.length);
-        };
-        loadData();
-    }, []);
-
+const PremiumBanner = ({ recipeCount, isPremium, onUpgrade }) => {
     const handleUpgrade = async () => {
         const response = await fetch('/upgradePremium', {
             method: 'POST',
@@ -142,16 +131,15 @@ const PremiumBanner = () => {
         });
         const result = await response.json();
         if (result.message) {
-            setIsPremium(true);
             alert('Upgraded to premium! You now have unlimited recipes!');
+            onUpgrade();
         }
     };
 
     if (isPremium) {
         return (
-            <div className="premiumBanner" style={{ backgroundColor: '#095d63', color: 'white' }}>
-                <p className="recipeCount" style={{ color: 'white' }}>Premium Account - Unlimited Recipes!</p>
-                <a href="/changePassword" className="changePasswordLink">Change Password</a>
+            <div className="premiumBanner">
+                <p className="recipeCount">Premium Account - Unlimited Recipes!</p>
             </div>
         );
     }
@@ -160,23 +148,50 @@ const PremiumBanner = () => {
         <div className="premiumBanner">
             <p className="recipeCount">Recipes: {recipeCount} / 5 (Free Plan)</p>
             <button className="upgradeButton" onClick={handleUpgrade}>
-                Upgrade to Premium - Unlimited Recipes!
+                Upgrade to Premium
             </button>
-            <a href="/changePassword" className="changePasswordLink">Change Password</a>
         </div>
     );
 };
 
 const App = () => {
     const [reloadRecipes, setReloadRecipes] = useState(false);
+    const [recipeCount, setRecipeCount] = useState(0);
+    const [isPremium, setIsPremium] = useState(false);
+
+    // Load account info on initial render
+    useEffect(() => {
+        const loadAccountInfo = async () => {
+            const accountResponse = await fetch('/getAccountInfo');
+            const accountData = await accountResponse.json();
+            setIsPremium(accountData.isPremium);
+        };
+        loadAccountInfo();
+    }, []);
+
+    // Load recipe count on initial render and when recipes are reloaded
+    // Refered to https://react.dev/learn/synchronizing-with-effects for useEffect dependencies and 
+    // how to properly reload data immediately when a recipe is added or deleted 
+    useEffect(() => {
+        const loadRecipeCount = async () => {
+            const recipeResponse = await fetch('/getRecipes');
+            const recipeData = await recipeResponse.json();
+            setRecipeCount(recipeData.recipes.length);
+        };
+        loadRecipeCount();
+    }, [reloadRecipes]);
 
     const triggerReload = () => {
         setReloadRecipes(!reloadRecipes);
     };
 
+    const handleUpgrade = () => {
+        setIsPremium(true);
+    };
+
     return (
         <div>
-            <PremiumBanner />
+            <PremiumBanner recipeCount={recipeCount} isPremium={isPremium} onUpgrade={handleUpgrade} />
             <div id="makeRecipe">
                 <RecipeForm triggerReload={triggerReload} />
             </div>
