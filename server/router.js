@@ -20,6 +20,7 @@ const router = (app) => {
   app.get('/recipes', mid.requiresLogin, controllers.Recipe.recipePage);
   app.post('/recipes', mid.requiresLogin, controllers.Recipe.makeRecipe);
   app.post('/deleteRecipe', mid.requiresLogin, controllers.Recipe.deleteRecipe);
+  app.post('/updateRecipe', mid.requiresLogin, controllers.Recipe.updateRecipe);
 
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 

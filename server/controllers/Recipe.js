@@ -4,6 +4,7 @@ const { Recipe } = models;
 
 const recipePage = async (req, res) => res.render('app');
 
+// Create a new recipe
 const makeRecipe = async (req, res) => {
   if (!req.body.title || !req.body.ingredients || !req.body.instructions
     || !req.body.cookTime || !req.body.difficulty) {
@@ -49,6 +50,7 @@ const makeRecipe = async (req, res) => {
   }
 };
 
+// Retrieve all recipes for the logged-in user
 const getRecipes = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };
@@ -61,6 +63,7 @@ const getRecipes = async (req, res) => {
   }
 };
 
+// Delete a recipe
 const deleteRecipe = async (req, res) => {
   try {
     const recipeId = req.body._id;
@@ -85,9 +88,49 @@ const deleteRecipe = async (req, res) => {
   }
 };
 
+// Update a recipe
+const updateRecipe = async (req, res) => {
+  if (!req.body._id) {
+    return res.status(400).json({ error: 'Recipe ID is required!' });
+  }
+
+  if (!req.body.title || !req.body.ingredients || !req.body.instructions
+    || !req.body.cookTime || !req.body.difficulty) {
+    return res.status(400).json({ error: 'All fields are required!' });
+  }
+
+  try {
+    const result = await Recipe.updateOne(
+      {
+        _id: req.body._id,
+        owner: req.session.account._id,
+      },
+      {
+        $set: {
+          title: req.body.title,
+          ingredients: req.body.ingredients,
+          instructions: req.body.instructions,
+          cookTime: req.body.cookTime,
+          difficulty: req.body.difficulty,
+        },
+      },
+    ).exec();
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'Recipe not found or unauthorized!' });
+    }
+
+    return res.status(200).json({ message: 'Recipe updated successfully!' });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'Error updating recipe!' });
+  }
+};
+
 module.exports = {
   recipePage,
   makeRecipe,
   getRecipes,
   deleteRecipe,
+  updateRecipe,
 };
