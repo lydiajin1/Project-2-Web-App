@@ -31,6 +31,7 @@ const makeRecipe = async (req, res) => {
     owner: req.session.account._id,
   };
 
+  // Save the new recipe to the database
   try {
     const newRecipe = new Recipe(recipeData);
     await newRecipe.save();
@@ -106,6 +107,9 @@ const updateRecipe = async (req, res) => {
         owner: req.session.account._id,
       },
       {
+        // Update fields
+        // $set operator sets the value of a field in a document
+        // referenced from https://www.mongodb.com/docs/manual/reference/operator/update/set/
         $set: {
           title: req.body.title,
           ingredients: req.body.ingredients,

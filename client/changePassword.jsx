@@ -2,6 +2,7 @@ const helper = require('./helper.js');
 const React = require('react');
 const { createRoot } = require('react-dom/client');
 
+// Handle password change form submission
 const handlePasswordChange = (e) => {
   e.preventDefault();
   helper.hideError();
@@ -32,6 +33,7 @@ const handlePasswordChange = (e) => {
   return false;
 };
 
+// React component for the change password form
 const ChangePasswordWindow = (props) => {
   return (
     <form id="changePasswordForm"
@@ -54,6 +56,7 @@ const ChangePasswordWindow = (props) => {
   );
 };
 
+// Initialize and render the ChangePasswordWindow component
 const init = () => {
   const root = createRoot(document.getElementById('content'));
   root.render(<ChangePasswordWindow />);

@@ -291,6 +291,7 @@ const App = () => {
     );
 };
 
+// Initialize and render the App component
 const init = () => {
     const root = createRoot(document.getElementById('app'));
     root.render(<App />);

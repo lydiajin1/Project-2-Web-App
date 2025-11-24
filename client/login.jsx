@@ -2,6 +2,7 @@ const helper = require('./helper.js');
 const React = require('react');
 const { createRoot } = require('react-dom/client');
 
+// Handle login form submission
 const handleLogin = (e) => {
     e.preventDefault();
     helper.hideError();
@@ -18,6 +19,7 @@ const handleLogin = (e) => {
     return false;
 }
 
+// Handle signup form submission
 const handleSignup = (e) => {
     e.preventDefault();
     helper.hideError();
@@ -41,6 +43,7 @@ const handleSignup = (e) => {
     return false;
 }
 
+// React component for the login form
 const LoginWindow = (props) => {
     return (
         <form id="loginForm"
@@ -60,6 +63,7 @@ const LoginWindow = (props) => {
     );
 };
 
+// React component for the signup form
 const SignupWindow = (props) => {
     return (
         <form id="signupForm"
@@ -81,6 +85,7 @@ const SignupWindow = (props) => {
     );
 };
 
+// Initialize and render the appropriate form based on user interaction
 const init = () => {
     const loginButton = document.getElementById('loginButton');
     const signupButton = document.getElementById('signupButton');
