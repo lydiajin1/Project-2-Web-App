@@ -3,12 +3,26 @@
   <meta charset="utf-8"/>
   <title>Recipe Nook</title>
   <link rel="shortcut icon" href="/assets/img/favicon.png"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
   <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
 <body>
-  <nav><a href="/login"><img id="logo" src="/assets/img/recipeNook.png" alt="recipe nook logo"/></a>
-    <div class="navlink"><a id="loginButton" href="/login">Login</a></div>
-    <div class="navlink"><a id="signupButton" href="/signup">Sign up</a></div>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/login">
+        <img id="logo" src="/assets/img/recipeNook.png" alt="recipe nook logo"/>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" id="loginButton" href="/login">
+          <span>Login</span>
+        </a>
+        <a class="navbar-item" id="signupButton" href="/signup">
+          <span>Sign Up</span>
+        </a>
+      </div>
+    </div>
   </nav>
 
   <section id="content">

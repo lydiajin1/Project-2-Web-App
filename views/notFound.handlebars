@@ -3,11 +3,23 @@
   <meta charset="utf-8"/>
   <title>404 - Recipe Nook</title>
   <link rel="shortcut icon" href="/assets/img/favicon.png"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
   <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
 <body>
-  <nav><a href="/"><img id="logo" src="/assets/img/recipeNook.png" alt="recipe nook logo"/></a>
-    <div class="navlink"><a href="/login">Login</a></div>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img id="logo" src="/assets/img/recipeNook.png" alt="recipe nook logo"/>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="/login">
+          <span>Login</span>
+        </a>
+      </div>
+    </div>
   </nav>
 
   <div class="notFoundContainer">

@@ -1,97 +1,105 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    color-scheme: light !important;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: #fef8f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #fff8f0 0%, #ffe8d6 50%, #ffd9b3 100%);
+    min-height: 100vh;
     color: #2c3e50;
 }
 
-/* Navigation */
-nav {
-    background: #f59e0b;
-    padding: 0 40px;
-    display: flex;
-    align-items: center;
-    height: 70px;
+/* Navbar */
+.navbar {
+    background: linear-gradient(90deg, #f59e0b 0%, #fb923c 100%);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
 }
 
-#logo {
-    height: 45px;
-    margin-right: auto;
-}
-
-.navlink {
-    margin-left: 20px;
-}
-
-.navlink a {
+.navbar-item {
     color: white;
-    text-decoration: none;
-    padding: 10px 20px;
+}
+
+.navbar-item:hover {
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 20px;
 }
 
-.navlink a:hover {
-    background: rgba(255, 255, 255, 0.2);
+#logo {
+    height: 50px;
+    max-height: none;
+}
+
+.navbar-menu {
+    background-color: transparent;
 }
 
 /* Premium Banner */
 .premiumBanner {
-    background: white;
-    padding: 20px 40px;
+    border-bottom: 2px solid #fed7aa;
+}
+
+.premiumBannerFree {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #e5e7eb;
+    align-items: center;
+    background: #fff7ed;
 }
 
-.recipeCount {
-    font-weight: bold;
+.premiumBannerSuccess {
+    background: linear-gradient(135deg, #fffbf5 0%, #fff4e6 100%);
+    border-left: 4px solid #f59e0b;
 }
 
-.upgradeButton {
-    background: #f59e0b;
-    color: white;
-    border: none;
-    padding: 10px 24px;
-    border-radius: 20px;
-    cursor: pointer;
+.premiumPerks {
+    font-size: 0.9em;
+    margin-top: 5px;
+    opacity: 0.9;
 }
 
-.upgradeButton:hover {
-    background: #d97706;
-}
-
-/* Forms */
-.recipeForm,
-.mainForm {
-    background: white;
-    margin: 40px auto;
-    padding: 30px;
-    border-radius: 10px;
-    border: 1px solid #e5e7eb;
-}
-
+/* Recipe Form */
 .recipeForm {
+    background: linear-gradient(135deg, #ffffff 0%, #fff7ed 100%);
+    border: 3px solid #fb923c;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 8px 24px rgba(251, 146, 60, 0.2);
     max-width: 700px;
 }
 
-.mainForm {
-    max-width: 420px;
-    margin-top: 100px;
-    padding: 40px;
+.recipeForm h3 {
+    color: #ea580c;
 }
 
-.recipeForm label,
-.mainForm label {
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    font-weight: bold;
+.recipeForm .label {
+    color: #c2410c;
+}
+
+.recipeForm .input,
+.recipeForm .textarea {
+    border-color: #fed7aa;
+    background: white;
+    color: #2c3e50;
+}
+
+.recipeForm .input:focus,
+.recipeForm .textarea:focus {
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+}
+
+.recipeForm .textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Login/Signup/Change Password */
+.mainForm {
+    background: white;
+    max-width: 420px;
+    margin: 100px auto 40px;
+    padding: 40px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
 }
 
 .mainForm h3 {
@@ -99,147 +107,137 @@ nav {
     color: #0c4e53;
     font-size: 2em;
     margin-bottom: 25px;
+    font-weight: bold;
 }
 
-.recipeForm input,
-.recipeForm textarea,
+.mainForm label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.mainForm input[type="text"],
+.mainForm input[type="password"],
 #user, #pass, #pass2, #oldPassword, #newPassword, #newPassword2 {
+    background-color: white;
+    color: #2c3e50;
+    border: 2px solid #e5e7eb;
     width: 100%;
     padding: 10px;
-    border: 2px solid #e5e7eb;
     border-radius: 5px;
 }
 
-.recipeForm input:focus,
-.recipeForm textarea:focus,
+.mainForm input:focus,
 #user:focus, #pass:focus, #pass2:focus, #oldPassword:focus, #newPassword:focus, #newPassword2:focus {
-    outline: none;
     border-color: #f59e0b;
+    outline: none;
 }
 
-.recipeForm textarea {
-    resize: vertical;
-    min-height: 80px;
-    font-family: Arial, sans-serif;
-}
-
-.makeRecipeSubmit,
+/* Buttons */
 .formSubmit {
+    background: #f59e0b;
+    color: white;
     width: 100%;
     margin-top: 20px;
-    padding: 12px;
-    background: #f59e0b;
+    font-size: 1.1em;
     border: none;
     border-radius: 5px;
-    color: white;
     font-weight: bold;
     cursor: pointer;
+    padding: 12px;
 }
 
-.formSubmit {
-    font-size: 1.1em;
-}
-
-.makeRecipeSubmit:hover,
 .formSubmit:hover {
     background: #d97706;
 }
 
-/* Recipe Cards */
-#recipes {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 30px;
+.makeRecipeSubmit,
+.editRecipeButton,
+.upgradeButton {
+    background: #f59e0b;
+    color: white;
 }
 
-.recipeList {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 25px;
+.makeRecipeSubmit:hover,
+.editRecipeButton:hover,
+.upgradeButton:hover {
+    background: #d97706;
 }
 
-.recipe {
-    background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
-    padding: 25px;
-}
-
-.recipe:hover {
-    border-color: #f59e0b;
-}
-
-.emptyRecipe {
-    text-align: center;
-    color: #9ca3af;
-    margin: 80px 0;
-}
-
-.recipeTitle {
-    font-size: 1.5em;
-    color: #0c4e53;
-    margin-bottom: 15px;
-}
-
-.recipeDetails {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 15px;
-    padding: 10px;
-    background: #fef8f0;
-    border-radius: 5px;
-}
-
-.recipeDetails p {
-    margin: 0;
-    font-size: 0.9em;
-    font-weight: bold;
-    color: #6b7280;
-}
-
-.recipeContent {
-    margin: 15px 0;
-}
-
-.recipeContent p {
-    margin: 10px 0;
-}
-
-.recipeText {
-    white-space: pre-wrap;
+.upgradeButton {
+    border-radius: 20px;
 }
 
 .deleteRecipeButton {
-    width: 100%;
-    margin-top: 15px;
     background: #ef4444;
     color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
 }
 
 .deleteRecipeButton:hover {
     background: #dc2626;
 }
 
-/* Error Messages */
-.hidden {
-    display: none;
+/* Search Bar */
+.searchBar input {
+    border-color: #fed7aa;
+    background: white;
 }
 
-#errorContainer {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 15px 20px;
-    background: #ffeeee;
-    border-radius: 5px;
+.searchBar input:focus {
+    border-color: #f59e0b;
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.2);
 }
 
-#errorMessage {
-    color: #dc2626;
+/* Recipe Cards */
+.recipe {
+    background: linear-gradient(135deg, #ffffff 0%, #fffbf5 100%);
+    border-color: #fed7aa;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.1);
+    transition: all 0.3s ease;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    color: #2c3e50;
+}
+
+.recipe:hover {
+    border-color: #f59e0b;
+    box-shadow: 0 12px 28px rgba(245, 158, 11, 0.25);
+    transform: translateY(-4px);
+}
+
+.recipeTitle {
+    color: #0c4e53;
+}
+
+.recipeDetails {
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    border-radius: 8px;
+    border: 1px solid #fed7aa;
+    padding: 12px;
+}
+
+.recipeDetails p {
+    color: #6b7280;
+}
+
+.recipeContent {
+    margin-top: 20px;
+}
+
+.recipeContent p:first-child {
+    margin-top: 0;
+}
+
+.recipeText {
+    white-space: pre-wrap;
+}
+
+.recipeList {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
 /* 404 Page */
@@ -257,6 +255,7 @@ nav {
 .notFoundSubtitle {
     font-size: 2em;
     margin: 20px 0;
+    color: #2c3e50;
 }
 
 .notFoundText {
@@ -281,32 +280,44 @@ nav {
     background: #d97706;
 }
 
+/* Utilities */
 .backLink {
     display: block;
     text-align: center;
     color: #f59e0b;
     margin-top: 20px;
-    text-decoration: none;
 }
 
 .backLink:hover {
     text-decoration: underline;
 }
 
+.emptyRecipe {
+    text-align: center;
+    color: #9ca3af;
+    margin: 80px 0;
+}
+
+#errorContainer {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 15px 20px;
+    background: #ffeeee;
+    border-radius: 5px;
+}
+
+#errorMessage {
+    color: #dc2626;
+}
+
+.hidden {
+    display: none;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
-    nav {
-        padding: 0 20px;
-    }
-
-    .premiumBanner {
-        flex-direction: column;
-        text-align: center;
-        padding: 15px;
-    }
-
-    .recipeList {
-        grid-template-columns: 1fr;
+    #makeRecipe {
+        position: static;
     }
 
     .mainForm {
