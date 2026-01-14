@@ -9,6 +9,7 @@ const helmet = require('helmet');
 const session = require('express-session');
 const RedisStore = require('connect-redis').default;
 const redis = require('redis');
+const MemoryStore = require('memorystore')(session);
 
 const router = require('./router.js');
 
@@ -22,13 +23,15 @@ mongoose.connect(dbURI).catch((err) => {
   }
 });
 
+/** 
 const redisClient = redis.createClient({
   url: process.env.REDISCLOUD_URL,
-});
+}); 
+*/
 
-redisClient.on('error', (err) => console.log('Redis Client Error', err));
+// redisClient.on('error', (err) => console.log('Redis Client Error', err));
 
-redisClient.connect().then(() => {
+// redisClient.connect().then(() => {
   const app = express();
 
   app.use(helmet());
@@ -40,7 +43,7 @@ redisClient.connect().then(() => {
 
   app.use(session({
     key: 'sessionid',
-    store: new RedisStore({ client: redisClient }),
+    store: new MemoryStore(),
     secret: 'Recipe Book Secret',
     resave: false,
     saveUninitialized: false,
@@ -56,4 +59,4 @@ redisClient.connect().then(() => {
     if (err) { throw err; }
     console.log(`Listening on port ${port}`);
   });
-});
+//});

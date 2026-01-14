@@ -45,6 +45,7 @@
     "express-handlebars": "^7.1.2",
     "express-session": "^1.18.0",
     "helmet": "^7.1.0",
+    "memorystore": "^1.6.7",
     "mongoose": "^8.2.3",
     "redis": "^4.6.13",
     "serve-favicon": "^2.5.0",
